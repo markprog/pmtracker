@@ -1,0 +1,10 @@
+name: shared_preferences_repository
+description: Dart package which manages the storage domain.
+publish_to: none
+
+environment:
+  sdk: ">=3.8.0 <4.0.0"
+
+dependencies:
+  equatable: ^2.0.0
+  shared_preferences: ^2.5.3

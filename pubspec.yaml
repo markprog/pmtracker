@@ -1,5 +1,5 @@
 name: matrix_app_w_bloc
-description: "A new Flutter project."
+description: "New version of matrix app"
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -28,12 +28,27 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  authentication_repository:
+    path: packages/authentication_repository
+  project_repository:
+    path: packages/project_repository
+  user_repository:
+    path: packages/user_repository
+  shared_preferences_repository:
+    path: packages/shared_preferences_repository
   flutter:
     sdk: flutter
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
+  flutter_bloc: ^9.1.1
+  equatable: ^2.0.7
+  google_sign_in: ^6.3.0
+  http: ^1.4.0
+  formz: ^0.8.0
+  shared_preferences: ^2.5.3
+  provider: ^6.1.5
 
 dev_dependencies:
   flutter_test:

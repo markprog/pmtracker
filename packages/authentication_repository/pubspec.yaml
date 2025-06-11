@@ -1,0 +1,14 @@
+name: authentication_repository
+description: Dart package which manages the project domain.
+publish_to: none
+
+environment:
+  sdk: ">=3.8.0 <4.0.0"
+
+
+dependencies:
+  http: ^1.4.0
+  user_repository:
+    path: ../user_repository
+  shared_preferences_repository:
+    path: ../shared_preferences_repository
