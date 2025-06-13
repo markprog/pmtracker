@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="matrix_app_w_bloc"
+        android:label="Matrix_w_bloc"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
