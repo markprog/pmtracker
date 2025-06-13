@@ -1,9 +1,15 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:project_repository/project_repository.dart';import 'package:provider/provider.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:project_repository/project_repository.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences_repository/storage_repository.dart';
 
 import '../../authentication/bloc/authentication_bloc.dart';
+import '../../constants/AppIcons.dart';
+import '../../utils.dart';
 import '../bloc/home_bloc.dart';
 
 class HomePage extends StatelessWidget {
@@ -15,11 +21,41 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final storage = Provider.of<SharedPreferencesHelper>(context, listen: false);
+    final storage =
+        Provider.of<SharedPreferencesHelper>(context, listen: false);
     return BlocProvider(
         create: (context) =>
             ProjectBloc(ProjectRepository(), storage)..add(LoadProject()),
         child: Scaffold(
+            appBar: AppBar(
+              automaticallyImplyLeading: false,
+              actions: [
+                Padding(
+                  padding: const EdgeInsets.all(10),
+                  // TODO: Add localization
+                  child: Text(
+                    "Projects",
+                    // AppLocalizations.of(context)!.hmAppProjects,
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                )
+              ],
+              title: Row(
+                children: [
+                  SvgPicture.asset(
+                    AppIcons.gallery,
+                    width: 30,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(10),
+                    child: Text(
+                      'MATRIX',
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
+                  ),
+                ],
+              ),
+            ),
             body: BlocListener<ProjectBloc, ProjectState>(
                 listenWhen: (previous, current) =>
                     previous.status != current.status &&
@@ -44,32 +80,7 @@ class HomePage extends StatelessWidget {
                           itemCount: state.projects.length,
                           itemBuilder: (context, index) {
                             final project = state.projects[index];
-                            return ListTile(
-                              title: Text(project.shortName),
-                              onLongPress: () async {
-                                final shouldDelete = await showDialog<bool>(
-                                  context: context,
-                                  builder: (context) => AlertDialog(
-                                    title: Text('Удалить проект?'),
-                                    content: Text('Вы действительно хотите удалить проект "${project.shortName}"?'),
-                                    actions: [
-                                      TextButton(
-                                        child: Text('Отмена'),
-                                        onPressed: () => Navigator.of(context).pop(false),
-                                      ),
-                                      TextButton(
-                                        child: Text('Удалить'),
-                                        onPressed: () => Navigator.of(context).pop(true),
-                                      ),
-                                    ],
-                                  ),
-                                );
-                                if (!context.mounted) return;
-                                if (shouldDelete == true) {
-                                  context.read<ProjectBloc>().add(DeleteProject(id: project.id));
-                                }
-                              },
-                            );
+                            return _CardWidget(text: project.shortName,);
                           });
                     case ProjectStatus.error:
                       return Center(
@@ -80,6 +91,75 @@ class HomePage extends StatelessWidget {
   }
 }
 
+class _CardWidget extends StatelessWidget {
+  const _CardWidget({super.key, required this.text});
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+          vertical: 8.0, horizontal: 16.0),
+      child: ListTile(
+        // NOTE: Use this for navigate from this screen to tasks screen and sections of this project
+        onTap: () async {},
+        onLongPress: () {
+          log("Long press on project");
+          Utils.showModalBottom(
+              context: context,
+              child: _ToggleProject());
+        },
+        leading: Container(
+          width: 40,
+          height: 40,
+          decoration: const BoxDecoration(
+            color: Colors.red,
+            shape: BoxShape.circle,
+          ),
+        ),
+        title: Text(
+          text,
+          style: Theme.of(context).textTheme.titleMedium,
+        ),
+        trailing: const Icon(Icons.arrow_forward_ios,
+            color: Colors.grey, size: 16),
+      ),
+    );
+  }
+}
+
+class _ToggleProject extends StatelessWidget {
+  const _ToggleProject({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(20),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          ListTile(
+            leading: const Icon(
+              Icons.delete,
+              color: Colors.red,
+            ),
+            title: const Text(
+              "Delete Section",
+              style: TextStyle(color: Colors.white, fontSize: 16),
+            ),
+            onTap: () {
+              print("Delete project");
+              Navigator.pop(context);
+            },
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+
+
 class AccountPage extends StatelessWidget {
   const AccountPage({super.key});
 
@@ -89,10 +169,14 @@ class AccountPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [_Email(), _Name(), _LogoutButton()],),);
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [_Email(), _Name(), _LogoutButton()],
+      ),
+    );
   }
 }
-
 
 class _LogoutButton extends StatelessWidget {
   const _LogoutButton();
@@ -113,8 +197,7 @@ class _Email extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("${context.select(
-    (AuthenticationBloc bloc) => bloc.state.user)}");
+    print("${context.select((AuthenticationBloc bloc) => bloc.state.user)}");
     final email = context.select(
       (AuthenticationBloc bloc) => bloc.state.user.email,
     );
@@ -129,9 +212,8 @@ class _Name extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final name = context.select(
-          (AuthenticationBloc bloc) => bloc.state.user.name,
+      (AuthenticationBloc bloc) => bloc.state.user.name,
     );
     return Text('Name: $name');
   }
 }
-
