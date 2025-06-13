@@ -1,0 +1,168 @@
+{
+  "@@locale": "en",
+
+  "signInWithGoogle": "Sign In With Google",
+  "@signInWithGoogle": {
+    "description": "Button label for signing in using Google account"
+  },
+
+  "email": "Email",
+  "@email": {
+    "description": "Label for the email input field"
+  },
+
+  "passwordAR": "Password",
+  "@passwordAR": {
+    "description": "Label for the password input field"
+  },
+
+  "continueAR": "Continue",
+  "@continueAR": {
+    "description": "Button label to continue registration/login process"
+  },
+
+  "registrationError": "Registration error",
+  "@registrationError": {
+    "description": "Error message shown when user registration fails"
+  },
+
+  "dontHaveAccount": "Don’t have a Matrix account yet? ",
+  "@dontHaveAccount": {
+    "description": "Text shown before the sign up link"
+  },
+
+  "signUp": "Sign up",
+  "@signUp": {
+    "description": "Label for the sign-up button"
+  },
+
+  "byContinuing": "By continuing, you agree to the ",
+  "@byContinuing": {
+    "description": "Text shown before the terms of service and privacy policy links"
+  },
+
+  "termsOfService": "Terms of Service",
+  "@termsOfService": {
+    "description": "Clickable link to the Terms of Service page"
+  },
+
+  "and": " and ",
+  "@and": {
+    "description": "Conjunction used between two legal links"
+  },
+
+  "privacyPolicy": "Privacy Policy",
+  "@privacyPolicy": {
+    "description": "Clickable link to the Privacy Policy page"
+  },
+
+  "shortName": "Short name",
+  "@shortName": {
+    "description": "Label of text field"
+  },
+
+  "descriptionF": "Description",
+  "@descriptionF": {
+    "description": "Label of text field"
+  },
+
+  "name": "Name",
+  "@name": {
+    "description": "Label for the name input field"
+  },
+
+  "confirmPassword": "Confirm password",
+  "@confirmPassword": {
+    "description": "Label for the field to confirm the password"
+  },
+
+  "noAccountText": "Don’t have a Matrix account yet?",
+  "@noAccountText": {
+    "description": "Alternative wording for the prompt to sign up"
+  },
+
+  "signIn": "Sign in",
+  "@signIn": {
+    "description": "Button label for user login"
+  },
+
+  "loginError": "Incorrect login or password",
+  "@loginError": {
+    "description": "Message shown when login credentials are wrong"
+  },
+
+  "navigationHome": "Home",
+  "@navigationHome": {
+    "description": "Label for the home tab in the navigation bar"
+  },
+
+  "navigationSearch": "Search",
+  "@navigationSearch": {
+    "description": "Label for the search tab in the navigation bar"
+  },
+
+  "navigationTasks": "Tasks",
+  "@navigationTasks": {
+    "description": "Label for the tasks tab in the navigation bar"
+  },
+
+  "navigationAccount": "Account",
+  "@navigationAccount": {
+    "description": "Label for the account/profile tab in the navigation bar"
+  },
+
+  "navigationNotifications": "Notifications",
+  "@navigationNotifications": {
+    "description": "Label for the notifications tab in the navigation bar"
+  },
+
+  "hmAppProjects": "Projects",
+  "@nmAppProjects": {
+    "description": "Title for the list of user projects"
+  },
+
+  "hmNProject": "New project",
+  "@hmNProject": {
+    "description": "Label for the 'New project' button"
+  },
+
+  "noProjects": "No projects available",
+  "@noProjects": {
+    "discription": "The label text that will be displayed if the user does not have any projects."
+  },
+
+  "allTasks": "All Tasks",
+  "@allTasks": {
+    "description": "Title for appBar on tasks Screen"
+  },
+
+  "newTask": "New task",
+  "@newTask": {
+    "description": "Label for the 'New task' button on tasks screen"
+  },
+
+  "company": "Company",
+  "@company": {
+    "description": "Name of chapter on account screen"
+  },
+
+  "appSettings": "Application Settings",
+  "@appSettings": {
+    "description": "Name of chapter on account screen"
+  },
+
+  "language": "Language",
+  "@language": {
+    "description": "Label for the 'Language' button on account screen"
+  },
+
+  "version": "Version",
+  "@version": {
+    "description": "Label of widgets on account screen"
+  },
+
+  "signOut": "Sign out",
+  "@signOut": {
+    "description": "Label of 'Sign out' button on account page"
+  }
+}

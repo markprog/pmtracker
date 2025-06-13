@@ -1,0 +1,173 @@
+{
+  "@@locale": "ru",
+
+  "signInWithGoogle": "Войти через Google",
+  "@signInWithGoogle": {
+    "description": "Надпись на кнопке для входа через аккаунт Google"
+  },
+
+  "email": "Электронная почта",
+  "@email": {
+    "description": "Метка для поля ввода электронной почты"
+  },
+
+  "passwordAR": "Пароль",
+  "@passwordAR": {
+    "description": "Метка для поля ввода пароля"
+  },
+
+  "continueAR": "Продолжить",
+  "@continueAR": {
+    "description": "Надпись на кнопке продолжения регистрации или входа"
+  },
+
+  "registrationError": "Ошибка регистрации",
+  "@registrationError": {
+    "description": "Сообщение об ошибке при регистрации пользователя"
+  },
+
+  "dontHaveAccount": "Ещё нет аккаунта Matrix? ",
+  "@dontHaveAccount": {
+    "description": "Текст перед ссылкой на регистрацию"
+  },
+
+  "alreadyUseMTX": "Already use matrix before yet?",
+  "@alreadyUseMTX": {
+    "description": "Text shown before the sign in link"
+  },
+
+  "signUp": "Зарегистрироваться",
+  "@signUp": {
+    "description": "Надпись на кнопке регистрации"
+  },
+
+  "byContinuing": "Продолжая, вы соглашаетесь с ",
+  "@byContinuing": {
+    "description": "Текст перед ссылками на условия использования и политику конфиденциальности"
+  },
+
+  "termsOfService": "Условиями использования",
+  "@termsOfService": {
+    "description": "Кликабельная ссылка на страницу с условиями использования"
+  },
+
+  "and": " и ",
+  "@and": {
+    "description": "Союз между двумя юридическими ссылками"
+  },
+
+  "privacyPolicy": "Политикой конфиденциальности",
+  "@privacyPolicy": {
+    "description": "Кликабельная ссылка на страницу с политикой конфиденциальности"
+  },
+
+  "shortName": "Сокращённое название",
+  "@shortName": {
+    "description": "Название поля ввода"
+  },
+
+  "descriptionF": "Описание",
+  "@descriptionF": {
+    "description": "Название поля ввода"
+  },
+
+  "name": "Имя",
+  "@name": {
+    "description": "Метка для поля ввода имени"
+  },
+
+  "confirmPassword": "Подтвердите пароль",
+  "@confirmPassword": {
+    "description": "Метка для поля повторного ввода пароля"
+  },
+
+  "noAccountText": "Ещё нет аккаунта Matrix?",
+  "@noAccountText": {
+    "description": "Альтернативная формулировка предложения зарегистрироваться"
+  },
+
+  "signIn": "Войти",
+  "@signIn": {
+    "description": "Надпись на кнопке входа"
+  },
+
+  "loginError": "Неверный логин или пароль",
+  "@loginError": {
+    "description": "Сообщение об ошибке при неверных учётных данных"
+  },
+
+  "navigationHome": "Главная",
+  "@navigationHome": {
+    "description": "Название вкладки 'Главная' в нижней навигации"
+  },
+
+  "navigationSearch": "Поиск",
+  "@navigationSearch": {
+    "description": "Название вкладки 'Поиск' в нижней навигации"
+  },
+
+  "navigationTasks": "Задачи",
+  "@navigationTasks": {
+    "description": "Название вкладки 'Задачи' в нижней навигации"
+  },
+
+  "navigationAccount": "Аккаунт",
+  "@navigationAccount": {
+    "description": "Название вкладки 'Аккаунт/Профиль' в нижней навигации"
+  },
+
+  "navigationNotifications": "Уведомления",
+  "@navigationNotifications": {
+    "description": "Название вкладки 'Уведомления' в нижней навигации"
+  },
+
+  "hmAppProjects": "Проекты",
+  "@hmAppProjects": {
+    "description": "Заголовок списка проектов пользователя"
+  },
+
+  "hmNProject": "Новый проект",
+  "@hmNProject": {
+    "description": "Надпись на кнопке создания нового проекта"
+  },
+
+  "noProjects": "Нет доступных проектов",
+  "@noProjects": {
+    "discription": "Текст, который будет отображаться, если у пользователя нет никаких проектов"
+  },
+
+  "allTasks": "Все задачи",
+  "@allTasks": {
+    "description": "Заголовок AppBar на экране задач"
+  },
+
+  "newTask": "Новая задача",
+  "@newTask": {
+    "description": "Надпись на кнопке добавления новой задачи"
+  },
+
+  "company": "Компания",
+  "@company": {
+    "description": "Название раздела на экране аккаунта"
+  },
+
+  "appSettings": "Настройки приложения",
+  "@appSettings": {
+    "description": "Название раздела с настройками на экране аккаунта"
+  },
+
+  "language": "Язык",
+  "@language": {
+    "description": "Надпись на кнопке выбора языка в настройках"
+  },
+
+  "version": "Версия",
+  "@version": {
+    "description": "Надпись, отображающая текущую версию приложения"
+  },
+
+  "signOut": "Выйти",
+  "@signOut": {
+    "description": "Надпись на кнопке выхода из аккаунта"
+  }
+}
