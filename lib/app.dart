@@ -2,6 +2,7 @@ import 'package:authentication_repository/authentication_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:matrix_app_w_bloc/splash/view/splash_page.dart';
+import 'package:matrix_app_w_bloc/theme/default_theme.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences_repository/storage_repository.dart';
 import 'package:user_repository/user_repository.dart';
@@ -52,6 +53,7 @@ class _AppViewState extends State<AppView> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: Themes.defaultTheme,
       navigatorKey: _navigatorKey,
       builder: (context, child) {
         return BlocListener<AuthenticationBloc, AuthenticationState>(
