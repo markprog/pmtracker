@@ -1,8 +1,7 @@
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:matrix_bloc_app/service/storage.dart';
-import 'package:matrix_bloc_app/splash/view/splash_page.dart';
+import 'package:matrix_app_w_bloc/splash/view/splash_page.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences_repository/storage_repository.dart';
 import 'package:user_repository/user_repository.dart';

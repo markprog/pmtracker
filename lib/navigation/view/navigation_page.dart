@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:matrix_bloc_app/home/home.dart';
-import 'package:matrix_bloc_app/navigation/view/nav_bar.dart';
-import 'package:matrix_bloc_app/notifications/view/notifications_page.dart';
-import 'package:matrix_bloc_app/tasks/view/tasks_page.dart';
-
+import '../../home/view/home_page.dart';
 import '../cubit/home_nav_bar_cubit.dart';
+import '../nav_bar/nav_bar.dart';
 
 class NavigationPage extends StatelessWidget {
   const NavigationPage({super.key});

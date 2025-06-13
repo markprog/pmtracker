@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:matrix_bloc_app/home/bloc/home_bloc.dart';
 import 'package:project_repository/project_repository.dart';import 'package:provider/provider.dart';
 import 'package:shared_preferences_repository/storage_repository.dart';
 
 import '../../authentication/bloc/authentication_bloc.dart';
+import '../bloc/home_bloc.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});

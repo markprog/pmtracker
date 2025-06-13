@@ -4,7 +4,6 @@ import 'dart:convert';
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:matrix_bloc_app/service/storage.dart';
 import 'package:shared_preferences_repository/storage_repository.dart';
 import 'package:user_repository/user_repository.dart';
 

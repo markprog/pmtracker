@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:matrix_bloc_app/navigation/cubit/home_nav_bar_cubit.dart';
+
+import '../cubit/home_nav_bar_cubit.dart';
 
 class NavBar extends StatelessWidget {
   const NavBar({super.key});
