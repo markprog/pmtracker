@@ -5,6 +5,7 @@ import 'package:matrix_app_w_bloc/splash/view/splash_page.dart';
 import 'package:matrix_app_w_bloc/theme/default_theme.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences_repository/storage_repository.dart';
+import 'package:tasks_repository/tasks_repository.dart';
 import 'package:user_repository/user_repository.dart';
 
 import 'authentication/bloc/authentication_bloc.dart';
@@ -24,6 +25,7 @@ class App extends StatelessWidget {
           dispose: (repository) => repository.dispose(),
         ),
         RepositoryProvider(create: (_) => UserRepository()),
+        RepositoryProvider(create: (_) => TasksRepository()),
       ],
       child: BlocProvider(
         lazy: false,

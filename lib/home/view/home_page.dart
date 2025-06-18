@@ -3,9 +3,12 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:matrix_app_w_bloc/navigation/cubit/home_nav_bar_cubit.dart';
+import 'package:matrix_app_w_bloc/tasks/bloc/tasks_bloc.dart';
 import 'package:project_repository/project_repository.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences_repository/storage_repository.dart';
+import 'package:tasks_repository/tasks_repository.dart';
 
 import '../../authentication/bloc/authentication_bloc.dart';
 import '../../constants/AppIcons.dart';
@@ -56,44 +59,66 @@ class HomePage extends StatelessWidget {
                 ],
               ),
             ),
-            body: BlocListener<ProjectBloc, ProjectState>(
-                listenWhen: (previous, current) =>
-                    previous.status != current.status &&
-                    current.status == ProjectStatus.error,
-                listener: (context, state) {
-                  if (state.status == ProjectStatus.error) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                          content: Text(state.message ?? 'Произошла ошибка')),
-                    );
-                  }
-                },
-                child: BlocBuilder<ProjectBloc, ProjectState>(
-                    builder: (context, state) {
-                  switch (state.status) {
-                    case ProjectStatus.initial:
-                      return const SizedBox.shrink();
-                    case ProjectStatus.loading:
-                      return Center(child: CircularProgressIndicator());
-                    case ProjectStatus.loaded:
-                      return ListView.builder(
-                          itemCount: state.projects.length,
-                          itemBuilder: (context, index) {
-                            final project = state.projects[index];
-                            return _CardWidget(text: project.shortName,);
-                          });
-                    case ProjectStatus.error:
-                      return Center(
-                        child: Text(state.message ?? "Ошибка загрузки"),
-                      );
-                  }
-                }))));
+            body: _ProjectsBody()));
+  }
+}
+
+class _ProjectsBody extends StatelessWidget {
+  const _ProjectsBody();
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocListener<ProjectBloc, ProjectState>(
+      listenWhen: (previous, current) =>
+      previous.status != current.status &&
+          current.status == ProjectStatus.error,
+      listener: (context, state) {
+        if (state.status == ProjectStatus.error) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(state.message ?? 'Произошла ошибка')),
+          );
+        }
+      },
+      child: BlocBuilder<ProjectBloc, ProjectState>(
+        builder: (context, state) {
+          switch (state.status) {
+            case ProjectStatus.initial:
+              return const SizedBox.shrink();
+            case ProjectStatus.loading:
+              return const Center(child: CircularProgressIndicator());
+            case ProjectStatus.loaded:
+              return _ProjectList(projects: state.projects);
+            case ProjectStatus.error:
+              return Center(
+                child: Text(state.message ?? "Ошибка загрузки"),
+              );
+          }
+        },
+      ),
+    );
+  }
+}
+
+class _ProjectList extends StatelessWidget {
+  const _ProjectList({required this.projects});
+  final List<Project> projects;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      itemCount: projects.length,
+      itemBuilder: (context, index) {
+        final project = projects[index];
+        return _CardWidget(text: project.shortName, projectId: project.id);
+      },
+    );
   }
 }
 
 class _CardWidget extends StatelessWidget {
-  const _CardWidget({super.key, required this.text});
+  const _CardWidget({super.key, required this.text, required this.projectId});
   final String text;
+  final int projectId;
 
   @override
   Widget build(BuildContext context) {
@@ -102,7 +127,10 @@ class _CardWidget extends StatelessWidget {
           vertical: 8.0, horizontal: 16.0),
       child: ListTile(
         // NOTE: Use this for navigate from this screen to tasks screen and sections of this project
-        onTap: () async {},
+        onTap: () async {
+          context.read<HomeNavBarCubit>().changeTo(1);
+          context.read<TasksBloc>().add(ProjectChanged(projectId));
+        },
         onLongPress: () {
           log("Long press on project");
           Utils.showModalBottom(

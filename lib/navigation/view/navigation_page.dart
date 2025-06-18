@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:matrix_app_w_bloc/tasks/bloc/tasks_bloc.dart';
+import 'package:shared_preferences_repository/storage_repository.dart';
+import 'package:tasks_repository/tasks_repository.dart';
 import '../../home/view/home_page.dart';
 import '../../tasks/view/tasks_page.dart';
 import '../cubit/home_nav_bar_cubit.dart';
@@ -16,8 +19,14 @@ class NavigationPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => HomeNavBarCubit(),
+    final repository = context.read<TasksRepository>();
+    final storage = context.read<SharedPreferencesHelper>();
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => HomeNavBarCubit(),),
+        BlocProvider(create: (context) => TasksBloc(repository, storage)),
+      ],
+
       child: BlocBuilder<HomeNavBarCubit, HomeNavBarState>(
           builder: (context, state) {
         final bloc = context.read<HomeNavBarCubit>();

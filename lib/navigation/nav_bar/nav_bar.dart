@@ -26,13 +26,17 @@ class NavBar extends StatelessWidget {
           selectedItemColor: AppColor.white,
           unselectedItemColor: AppColor.white,
           unselectedLabelStyle:
-          const TextStyle(fontSize: 10, color: AppColor.white),
+              const TextStyle(fontSize: 10, color: AppColor.white),
           selectedLabelStyle:
-          const TextStyle(fontSize: 10, color: AppColor.white),
+              const TextStyle(fontSize: 10, color: AppColor.white),
           onTap: onTap ?? (index) => bloc.changeTo(index),
           currentIndex: state.currentIndex,
           items: [
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+            BottomNavigationBarItem(
+              label: "Home",
+              icon: SvgPicture.asset(height: 35, AppIcons.homeInactive),
+              activeIcon: SvgPicture.asset(height: 35, AppIcons.homeActive),
+            ),
             BottomNavigationBarItem(
               label: "Tasks",
               // label: AppLocalizations.of(context)?.navigationTasks,
@@ -40,7 +44,10 @@ class NavBar extends StatelessWidget {
               activeIcon: SvgPicture.asset(height: 35, AppIcons.taskActive),
             ),
             BottomNavigationBarItem(
-                icon: Icon(Icons.account_circle_rounded), label: "Account"),
+              label: "Account",
+            icon: SvgPicture.asset(AppIcons.accActive, height: 35),
+          activeIcon: SvgPicture.asset(height: 35, AppIcons.accInactive),
+            )
             // BottomNavigationBarItem(
             //     icon: Icon(Icons.account_circle), label: "Account")
           ]);
