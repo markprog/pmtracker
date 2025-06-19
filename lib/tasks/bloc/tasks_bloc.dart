@@ -4,6 +4,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
+import 'package:project_repository/project_repository.dart';
 import 'package:shared_preferences_repository/storage_repository.dart';
 import 'package:tasks_repository/tasks_repository.dart';
 
@@ -31,8 +32,8 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
   }
 }
 
-List<Section> parseSectionsAndTasks(String body) {
+FullProject parseSectionsAndTasks(String body) {
   final Map<String, dynamic> decoded = jsonDecode(body);
-  final List<dynamic> projectList = decoded['data']['project']['sections'];
-  return projectList.map((json) => Section.fromJson(json)).toList();
+  final projectList = decoded['data']['project'];
+  return FullProject.fromJson(projectList);
 }

@@ -15,31 +15,38 @@ class TasksPage extends StatelessWidget {
           case SectionsAndTasksStatus.loading:
             return const Center(child: CircularProgressIndicator());
           case SectionsAndTasksStatus.loaded:
-            if (state.sectionsAndTasks.isEmpty) {
+          // Проверяем, что проект есть и в нем есть секции
+            final project = state.project;
+            if (project == null || project.sections.isEmpty) {
               return const Center(child: Text('Нет секций и задач'));
             }
-            return ListView.builder(
-              itemCount: state.sectionsAndTasks.length,
-              itemBuilder: (context, index) {
-                final section = state.sectionsAndTasks[index];
-                return CustomSection(
-                  title: section.name,
-                  tasks: section.tasks,
-                  isExpandedNotifier: ValueNotifier(false),
-                  childBottomSheet: _ToggleSection(),
-                );
-              },
+            return Scaffold(
+              appBar: AppBar(
+                title: Text(project.name), // Показываем имя проекта
+              ),
+              body: ListView.builder(
+                itemCount: project.sections.length,
+                itemBuilder: (context, index) {
+                  final section = project.sections[index];
+                  return CustomSection(
+                    title: section.name,
+                    tasks: section.tasks,
+                    isExpandedNotifier: ValueNotifier(false),
+                    childBottomSheet: _ToggleSection(),
+                  );
+                },
+              ),
             );
           case SectionsAndTasksStatus.error:
             return Center(
               child: Text(
-                state.message ?? 'Ошибка загрузки данных',
+                state.message ?? 'Error uploading data',
                 style: const TextStyle(color: Colors.red),
               ),
             );
           case SectionsAndTasksStatus.initial:
           default:
-            return const SizedBox.shrink();
+            return Center(child: Text("Please select a project"),);
         }
       },
     );
