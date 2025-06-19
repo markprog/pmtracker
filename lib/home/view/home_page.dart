@@ -24,53 +24,53 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final storage =
-        Provider.of<SharedPreferencesHelper>(context, listen: false);
-    return BlocProvider(
-        create: (context) =>
-            ProjectBloc(ProjectRepository(), storage)..add(LoadProject()),
-        child: Scaffold(
-            appBar: AppBar(
-              automaticallyImplyLeading: false,
-              actions: [
-                Padding(
-                  padding: const EdgeInsets.all(10),
-                  // TODO: Add localization
-                  child: Text(
-                    "Projects",
-                    // AppLocalizations.of(context)!.hmAppProjects,
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
-                )
-              ],
-              title: Row(
-                children: [
-                  SvgPicture.asset(
-                    AppIcons.gallery,
-                    width: 30,
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(10),
-                    child: Text(
-                      'MATRIX',
-                      style: Theme.of(context).textTheme.titleLarge,
-                    ),
-                  ),
-                ],
+    return Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          actions: [
+            Padding(
+              padding: const EdgeInsets.all(10),
+              // TODO: Add localization
+              child: Text(
+                "Projects",
+                // AppLocalizations.of(context)!.hmAppProjects,
+                style: Theme.of(context).textTheme.titleLarge,
               ),
-            ),
-            body: _ProjectsBody()));
+            )
+          ],
+          title: Row(
+            children: [
+              SvgPicture.asset(
+                AppIcons.gallery,
+                width: 30,
+              ),
+              Padding(
+                padding: EdgeInsets.all(10),
+                child: Text(
+                  'MATRIX',
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+              ),
+            ],
+          ),
+        ),
+        body: _ProjectsBody());
   }
 }
 
 class _ProjectsBody extends StatelessWidget {
   const _ProjectsBody();
 
+  Future<void> _onRefresh(BuildContext context) async {
+    context.read<ProjectBloc>().add(LoadProject());
+    await Future.delayed(Duration(milliseconds: 500));
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocListener<ProjectBloc, ProjectState>(
       listenWhen: (previous, current) =>
-      previous.status != current.status &&
+          previous.status != current.status &&
           current.status == ProjectStatus.error,
       listener: (context, state) {
         if (state.status == ProjectStatus.error) {
@@ -87,7 +87,9 @@ class _ProjectsBody extends StatelessWidget {
             case ProjectStatus.loading:
               return const Center(child: CircularProgressIndicator());
             case ProjectStatus.loaded:
-              return _ProjectList(projects: state.projects);
+              return RefreshIndicator(
+                  child: _ProjectList(projects: state.projects),
+                  onRefresh: () => _onRefresh(context));
             case ProjectStatus.error:
               return Center(
                 child: Text(state.message ?? "Ошибка загрузки"),
@@ -123,8 +125,7 @@ class _CardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(
-          vertical: 8.0, horizontal: 16.0),
+      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
       child: ListTile(
         // NOTE: Use this for navigate from this screen to tasks screen and sections of this project
         onTap: () async {
@@ -133,9 +134,7 @@ class _CardWidget extends StatelessWidget {
         },
         onLongPress: () {
           log("Long press on project");
-          Utils.showModalBottom(
-              context: context,
-              child: _ToggleProject());
+          Utils.showModalBottom(context: context, child: _ToggleProject());
         },
         leading: Container(
           width: 40,
@@ -149,8 +148,8 @@ class _CardWidget extends StatelessWidget {
           text,
           style: Theme.of(context).textTheme.titleMedium,
         ),
-        trailing: const Icon(Icons.arrow_forward_ios,
-            color: Colors.grey, size: 16),
+        trailing:
+            const Icon(Icons.arrow_forward_ios, color: Colors.grey, size: 16),
       ),
     );
   }
@@ -185,8 +184,6 @@ class _ToggleProject extends StatelessWidget {
     );
   }
 }
-
-
 
 class AccountPage extends StatelessWidget {
   const AccountPage({super.key});
